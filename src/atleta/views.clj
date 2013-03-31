@@ -24,15 +24,16 @@
         [:h1 "apoie um atleta"]
         [:nav.menu
           [:ul
-            [:li [:a {:href "/"} "Home"]]
-            [:li [:a {:href "/"} "Atletas"]]
-            [:li [:a {:href "/"} "Como funciona"]]
-            [:li [:a {:href "/"} "Quem somos"]]]]]
+            [:li [:a {:href "/"} "home"]]
+            [:li [:a {:href "/"} "atletas"]]
+            [:li [:a {:href "/"} "como funciona"]]
+            [:li [:a {:href "/"} "quem somos"]]]]]
       [:section#main
          [:div.group
            [:article#atletas-destaque
              [:h2 "Atletas em destaque"]
              (athletes)]
            [:article#ranking
-              [:h2 "Ranking"]]]]]))
+              [:h2 "Ranking"]]]]
+      [:footer]]))
   
