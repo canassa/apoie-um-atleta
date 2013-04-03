@@ -18,8 +18,8 @@
     :src (url-font file ".eot")
     :src (clojure.string/join ", " [
            (str (url-font file ".eot?#iefix") " format('embedded-opentype')")
+           (str (url-font file ".otf") " format('opentype')")
            (str (url-font file ".woff") " format('woff')")
-           (str (url-font file ".ttf") " format('truetype')")
            (str (url-font file ".svg#" file) " format('svg')")])
     :font-weight weight
     :font-style "normal"
@@ -31,7 +31,10 @@
   (font-face "caturrita" "caturrita-regular" "normal")
            
   [:body
-    :font-family "\"caturrita\", serif"]
+    :font-family "\"caturrita\", serif"
+    :-webkit-font-feature-settings "\"liga\", \"dlig\""
+    :-moz-font-feature-settings "\"liga\", \"dlig\""
+    :font-feature-settings "\"liga\", \"dlig\""]
            
   ["h1, h2, h3"
     :font-weight "bold"]
