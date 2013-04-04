@@ -2,7 +2,14 @@
   (:require (gaka [core :as gaka])))
 
 
+(defn prepare [css]
+  (clojure.walk/postwalk #(cond (ratio? %) (str (float (* 100 %)) "%")
+                                (number? %) (str % "px")
+                                :else %)
+                         css))
+
 (def half-screen (list :float "left" :width "50%"))
+(def header-shadow (list :text-shadow "-1px 1px 0px black"))
 
 
 (defn url [& args]
@@ -10,6 +17,9 @@
 
 (def url-img (partial url "img/"))
 (def url-font (partial url "font/"))
+
+(def orange "#ff7e00")
+(def green "#77b110")
 
 
 (defn font-face [family file weight] [
@@ -26,7 +36,7 @@
     ])
 
 
-(def rule [
+(def _rule [
   (font-face "caturrita" "caturrita-medium" "bold")
   (font-face "caturrita" "caturrita-regular" "normal")
            
@@ -38,17 +48,34 @@
            
   ["h1, h2, h3"
     :font-weight "bold"]
+           
+  [:h2.orange
+    :color orange
+    header-shadow]
+
+  [:h2.green
+    :color green
+    header-shadow]           
+           
+  [:h2.green
+    :color green]
 
   ["body > header"
-    :height "270px"
+    :position "relative"
+    :height 270
     :background (url-img "bg-header.png")
     [:h1
       :color "white"
       :text-align "center"
       :margin 0]
     [:.menu
-      :width "600px"
-      :height "50px"
+      :position "absolute"
+      :left 1/2
+      :bottom 0
+     
+      :width 600
+      :height 50
+     
       :margin "0 auto"
       :background (url-img "bg-menu.png")
       [:a
@@ -56,10 +83,10 @@
         :text-decoration "none"]
       [:li
         :float "left"
-        :width "25%"]]]
+        :width 1/4]]]
            
   [:#main 
-    :width "965px"
+    :width 965
     :margin "0 auto"
     [:.group
       :overflow "auto"]]
@@ -71,9 +98,13 @@
     half-screen]
            
   [:footer
-    :height "35px"
+    :height 35
     :background (url-img "bg-header.png")]
   ])
+
+
+(def rule (prepare _rule))
+
 
 (defn -main []
   (gaka/css rule))

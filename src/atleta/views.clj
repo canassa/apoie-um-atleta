@@ -1,6 +1,6 @@
 (ns atleta.views
   (:use [hiccup core page]
-        [atleta css entities]
+        [atleta entities]
         [korma db core])
   (:require (gaka [core :as gaka])))
 
@@ -18,7 +18,7 @@
       [:title "apoie um atleta"]
       (include-css "/css/normalize.css"
                    "/css/style.css")
-      [:style (map gaka/css rule)]]
+      [:style (map gaka/css atleta.css/rule)]]
     [:body
       [:header
         [:h1 "apoie um atleta"]
@@ -31,9 +31,9 @@
       [:section#main
          [:div.group
            [:article#atletas-destaque
-             [:h2 "Atletas em destaque"]
+             [:h2.orange "Atletas em destaque"]
              (athletes)]
            [:article#ranking
-              [:h2 "Ranking"]]]]
+              [:h2.green "Ranking"]]]]
       [:footer]]))
   
