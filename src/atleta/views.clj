@@ -2,13 +2,15 @@
   (:use [hiccup core page]
         [atleta entities]
         [korma db core])
-  (:require (gaka [core :as gaka])))
+  (:require (atleta css)
+            (gaka [core :as gaka])))
 
 
 (defn athletes []
   (map (fn [{name :name, age :age}]
          [:div
-           [:h2 name]
+           [:h2.name name]
+           [:img.support {:src "/img/apoiar.png"}]
            [:p age]]) (select athlete)))
 
 
@@ -21,6 +23,7 @@
       [:style (map gaka/css atleta.css/rule)]]
     [:body
       [:header
+        [:img.logo {:src "/img/logo.png"}]
         [:h1 "apoie um atleta"]
         [:nav.menu
           [:ul
@@ -36,4 +39,5 @@
            [:article#ranking
               [:h2.green "Ranking"]]]]
       [:footer]]))
-  
+
+atleta.css/rule
